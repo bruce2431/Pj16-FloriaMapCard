@@ -1,4 +1,4 @@
-# Floria-MapCard
+# Pj16-FloriaMapCard
 
 Floria 工作区预览卡片 · 缩略图：同源 `iframe` 内嵌真实 Floria web 前端的离线演示页（`?demo=1`），按组件树逐级展开、点选后高亮其在真实界面中的位置，并展示拟造的虚拟使用情景；每个组件名可作为 `@` 元素插入输入栏。
 
