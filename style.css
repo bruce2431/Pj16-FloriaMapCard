@@ -1,0 +1,51 @@
+:root{
+  --bg:#f6f7f9; --card:#fff; --line:#e3e7ee; --ink:#1c2128; --muted:#6b7280;
+  --accent:#4d6bfe; --hl:#f59e0b; --bub-u:#eef2ff; --bub-f:#f3f4f6;
+}
+html[data-theme="dark"]{
+  --bg:#111318; --card:#171a1f; --line:#2a2f38; --ink:#e6e9ef; --muted:#9aa2b1;
+  --accent:#6d86ff; --hl:#fbbf24; --bub-u:#1e2640; --bub-f:#20242c;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);
+  font:13px/1.5 system-ui,-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}
+/* 高度用视口单位：卡片在宿主 iframe 内，100% 链一旦断掉就会让下方组件树反压预览区 */
+#map{display:flex;flex-direction:column;height:100vh;height:100dvh;min-height:0;overflow:hidden}
+
+#map-main{flex:1;display:flex;flex-direction:column;min-height:0}
+/* 预览贴顶、组件树紧随其后：旧版拉伸铺满再把树钉在底部，窄卡片时中间会留一大段空白 */
+#stage-wrap{flex:0 1 auto;min-height:0;min-width:0;overflow:auto;padding:12px;position:relative;
+  display:flex;align-items:flex-start;justify-content:center;scrollbar-gutter:stable}
+#stage{position:relative;flex:none;margin:0;transform-origin:top left;opacity:0;transition:opacity .12s ease}
+#stage.on{opacity:1}
+#stage iframe{display:block;width:1440px;height:900px;border:0;border-radius:12px;
+  background:#fff;transform-origin:top left;pointer-events:auto;
+  box-shadow:0 8px 30px rgba(0,0,0,.12);outline:1px solid var(--line)}
+#hl{position:absolute;border:2px solid var(--hl);border-radius:6px;pointer-events:none;
+  background:color-mix(in srgb,var(--hl) 12%,transparent);transition:all .18s ease}
+#hl-tag{position:absolute;left:0;top:-22px;max-width:100%;padding:1px 6px;border-radius:5px;
+  background:var(--hl);color:#111;font-size:10.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#pick-tip{position:absolute;z-index:3;pointer-events:none;transform:translate(-50%,-140%);
+  max-width:420px;padding:3px 9px;border-radius:7px;background:#111;color:#fff;
+  font-size:11px;line-height:1.5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  box-shadow:0 4px 14px rgba(0,0,0,.28)}
+#stage-miss{position:absolute;left:22px;bottom:22px;max-width:min(560px,80%);padding:8px 12px;
+  border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--muted);font-size:12px}
+
+#side{flex:0 1 auto;display:flex;flex-direction:column;min-height:0;max-height:38%;
+  background:var(--card);border-top:1px solid var(--line)}
+#tree{flex:1 1 auto;min-height:0;overflow:auto;list-style:none;margin:0;padding:6px 8px 8px}
+#tree li{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px;align-items:center;
+  min-height:23px;padding:2px 8px;border-radius:6px;cursor:pointer;font-size:12px;color:var(--ink)}
+#tree li .cn{grid-row:1;min-width:0;display:flex;align-items:center;gap:5px;overflow:hidden}
+#tree li .cv{flex:none;width:10px;font-size:9px;color:var(--muted);transition:transform .12s ease}
+#tree li .cv.open{transform:rotate(90deg)}
+#tree li .cn .n{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#tree li .m{flex:none;font-size:10px;color:var(--muted);padding-left:4px}
+#tree li:hover{background:color-mix(in srgb,var(--accent) 8%,transparent)}
+#tree li.on{background:color-mix(in srgb,var(--accent) 16%,transparent);color:var(--accent);font-weight:600}
+#tree li.miss::after{content:" ⚠";color:#d97706}
+
+@media (max-width:720px){
+  #side{max-height:46%}
+}

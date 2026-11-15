@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Floria 缩略图</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="map">
+  <div id="map-main">
+    <div id="stage-wrap">
+      <div id="stage">
+        <iframe id="frame" src="/session/demo-1?demo=1" title="Floria 真实前端缩略图" tabindex="-1"></iframe>
+        <div id="hl" hidden><span id="hl-tag"></span></div>
+        <div id="pick-tip" hidden></div>
+      </div>
+      <div id="stage-miss" hidden></div>
+    </div>
+
+    <aside id="side">
+      <ul id="tree"></ul>
+    </aside>
+  </div>
+</div>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
